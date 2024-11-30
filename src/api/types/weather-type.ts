@@ -1,0 +1,42 @@
+import { Coordinates } from "./geolocation-type";
+
+export interface WeatherCondition {
+    id: number;
+    main: string;
+    description: string;
+    icon: string;
+}
+
+export interface WeatherData {
+    coord: Coordinates;
+    weather: WeatherCondition[];
+    main: {
+        temp: number;
+        feels_like: number;
+        temp_min: number;
+        temp_max: number;
+        pressure: number;
+        humidity: number;
+    };
+    wind: {
+        speed: number;
+        deg: number;
+    };
+    sys: {
+        sunrise: number;
+        sunset: number;
+        country: string;
+    };
+    name: string;
+    dt: number;
+}
+
+export interface WeatherDataProps {
+    data: WeatherData;
+}
+
+export interface WeatherDataState {
+    data: WeatherData | null;
+    error: string;
+    isDataLoaded: boolean;
+}
