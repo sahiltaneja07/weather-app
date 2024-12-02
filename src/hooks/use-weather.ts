@@ -14,7 +14,7 @@ const useWeather = (coordinates: Coordinates | null) => {
         if (coordinates) {
             getWeatherData();
         }
-    }, [coordinates]);
+    }, [coordinates?.lat]);
 
     function getWeatherData() {
         getCurrentWeather(coordinates)

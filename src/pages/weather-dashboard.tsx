@@ -4,6 +4,8 @@ import NoLocation from '@/components/no-location';
 import TemperatureChart from '@/components/temperature-chart';
 import { Button } from '@/components/ui/button';
 import WeatherDetail from '@/components/weather-detail';
+import WeatherForecast from '@/components/weather-forecast';
+import useForecast from '@/hooks/use-forecast';
 import useGeolocation from '@/hooks/use-geolocation';
 import useWeather from '@/hooks/use-weather';
 import { RefreshCw } from 'lucide-react';
@@ -16,13 +18,20 @@ const WeatherDashboard = () => {
         isLoading: isGeolocationLoading,
         getLocation
     } = useGeolocation();
+
     const {
         data: weatherData,
         error: weatherError,
         isDataLoaded: isWeatherDataLoaded
     } = useWeather(coords);
-    console.log(weatherData, weatherError, isWeatherDataLoaded);
-    if (isGeolocationLoading || !isWeatherDataLoaded) {
+
+    const {
+        data: forecastData,
+        error: forecastError,
+        isLoading: isForecastLoading
+    } = useForecast(coords);
+
+    if (isGeolocationLoading || !isWeatherDataLoaded || isForecastLoading) {
         return (
             <Loader />
         )
@@ -34,7 +43,7 @@ const WeatherDashboard = () => {
         )
     }
 
-    if (weatherError) {
+    if (weatherError || forecastError) {
         toast.error("Unknown error has occured", {
             description: "Please try again later"
         });
@@ -51,13 +60,13 @@ const WeatherDashboard = () => {
                     <RefreshCw />
                 </Button>
             </div>
-            <div className='flex justify-between mb-7'>
+            <div className='flex mb-7'>
                 <MyLocation data={weatherData} />
                 <TemperatureChart />
             </div>
-            <div className='flex justify-between'>
+            <div className='flex'>
                 <WeatherDetail data={weatherData} />
-                <TemperatureChart />
+                <WeatherForecast data={forecastData} />
             </div>
         </>
     )
