@@ -40,7 +40,7 @@ const WeatherDetail = ({ data }: WeatherDataProps) => {
     }]
 
     return (
-        <Card className="mr-4 flex-auto w-42 h-72">
+        <Card className="mr-4 flex-auto w-42 h-[260px]">
             <CardHeader>
                 <CardTitle>Weather Details</CardTitle>
             </CardHeader>

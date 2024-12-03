@@ -8,7 +8,7 @@ const MyLocation = ({ data }: WeatherDataProps) => {
         return `${Math.round(temp)}°`;
     }
     return (
-        <Card className="overflow-hidden mr-4 h-80">
+        <Card className="overflow-hidden mr-4 h-72 flex-auto w-42">
             <CardContent className="p-6">
                 <div className="grid gap-6 md:grid-cols-2">
                     <div className="space-y-4">

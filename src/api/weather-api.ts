@@ -16,7 +16,8 @@ export async function getCurrentWeather({ lat, lon }: Coordinates): Promise<Weat
 export async function getForecast({lat, lon}: Coordinates): Promise<Forecast> {
     const url = getUrl(APP_CONSTANT.forecast, {
         lat,
-        lon
+        lon,
+        units: "metric",
     });
     return getAPI<Forecast>(url);
 }

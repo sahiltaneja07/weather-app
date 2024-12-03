@@ -62,7 +62,7 @@ const WeatherDashboard = () => {
             </div>
             <div className='flex mb-7'>
                 <MyLocation data={weatherData} />
-                <TemperatureChart />
+                <TemperatureChart data={forecastData} />
             </div>
             <div className='flex'>
                 <WeatherDetail data={weatherData} />

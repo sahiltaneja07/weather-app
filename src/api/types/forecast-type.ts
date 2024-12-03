@@ -2,9 +2,6 @@ import { Coordinates } from "./geolocation-type";
 import { WeatherCondition, WeatherData } from "./weather-type";
 
 export interface Forecast {
-    cod: string;
-    message: number;
-    cnt: number;
     list: ForecastList[];
     city: City;
 }
@@ -33,7 +30,7 @@ interface City {
 }
 
 export interface ForecastState {
-    data: Forecast |null;
+    data: Forecast | null;
     error: string;
     isLoading: boolean;
 }
@@ -49,10 +46,10 @@ export interface DailyForecast {
     humidity: number;
     wind: number;
     weather: {
-      id: number;
-      main: string;
-      description: string;
-      icon: string;
+        id: number;
+        main: string;
+        description: string;
+        icon: string;
     };
-  
+
 }
