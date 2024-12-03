@@ -30,13 +30,3 @@ export interface WeatherData {
     name: string;
     dt: number;
 }
-
-export interface WeatherDataProps {
-    data: WeatherData;
-}
-
-export interface WeatherDataState {
-    data: WeatherData | null;
-    error: string;
-    isDataLoaded: boolean;
-}

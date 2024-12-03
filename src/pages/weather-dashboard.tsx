@@ -13,16 +13,16 @@ import { toast } from "sonner";
 
 const WeatherDashboard = () => {
     const {
-        coords,
+        data: coords,
         error: geolocationError,
         isLoading: isGeolocationLoading,
-        getLocation
+        refreshLocation
     } = useGeolocation();
 
     const {
         data: weatherData,
         error: weatherError,
-        isDataLoaded: isWeatherDataLoaded
+        isLoading: isWeatherDataLoading
     } = useWeather(coords);
 
     const {
@@ -31,7 +31,7 @@ const WeatherDashboard = () => {
         isLoading: isForecastLoading
     } = useForecast(coords);
 
-    if (isGeolocationLoading || !isWeatherDataLoaded || isForecastLoading) {
+    if (isGeolocationLoading || isWeatherDataLoading || isForecastLoading) {
         return (
             <Loader />
         )
@@ -39,7 +39,7 @@ const WeatherDashboard = () => {
 
     if (geolocationError || !coords) {
         return (
-            <NoLocation getLocation={getLocation} />
+            <NoLocation getLocation={refreshLocation} />
         )
     }
 
@@ -52,11 +52,15 @@ const WeatherDashboard = () => {
         )
     }
 
+    const refreshWeather = () => {
+        refreshLocation();
+    }
+
     return (
         <>
             <div className='flex justify-between mb-3'>
                 <span className='font-bold text-lg'>My Location</span>
-                <Button variant='outline'>
+                <Button variant='outline' onClick={refreshWeather}>
                     <RefreshCw />
                 </Button>
             </div>

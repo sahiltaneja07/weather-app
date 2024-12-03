@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { GeolocationState } from "@/api/types/geolocation-type";
+import { Coordinates } from "@/api/types/geolocation-type";
+import { DataState } from "@/api/types/generic-type";
 
 export default function useGeolocation() {
     const firstTime = useRef(true);
-    const [locationData, setLocationData] = useState<GeolocationState>({
+    const [locationData, setLocationData] = useState<DataState<Coordinates>>({
+        data: null,
         error: '',
-        coords: null,
         isLoading: true
     })
 
@@ -23,7 +24,7 @@ export default function useGeolocation() {
             navigator.geolocation.getCurrentPosition(handleSuccess, handleError);
         } else {
             setLocationData(({
-                coords: null,
+                data: null,
                 error: 'Geolocation not supported',
                 isLoading: false
             }));
@@ -32,7 +33,7 @@ export default function useGeolocation() {
 
     function handleSuccess(position) {
         setLocationData(({
-            coords: {
+            data: {
                 lat: position.coords.latitude,
                 lon: position.coords.longitude
             },
@@ -44,13 +45,22 @@ export default function useGeolocation() {
     function handleError(error) {
         setLocationData(({
             error: error.message,
-            coords: null,
+            data: null,
             isLoading: false
         }));
     }
 
+    function refreshLocation() {
+        setLocationData(({
+            error: '',
+            data: null,
+            isLoading: true
+        }));
+        getLocation();
+    }
+
     return {
         ...locationData,
-        getLocation
+        refreshLocation
     }
 }

@@ -29,16 +29,6 @@ interface City {
     sunset: number;
 }
 
-export interface ForecastState {
-    data: Forecast | null;
-    error: string;
-    isLoading: boolean;
-}
-
-export interface ForecastProps {
-    data: Forecast;
-}
-
 export interface DailyForecast {
     date: number;
     temp_min: number;

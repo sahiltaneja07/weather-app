@@ -1,10 +1,11 @@
-import { Forecast, ForecastState } from "@/api/types/forecast-type";
+import { Forecast } from "@/api/types/forecast-type";
+import { DataState } from "@/api/types/generic-type";
 import { Coordinates } from "@/api/types/geolocation-type";
 import { getForecast } from "@/api/weather-api";
 import { useEffect, useState } from "react";
 
 const useForecast = (coordinates: Coordinates | null) => {
-    const [forecast, setForecast] = useState<ForecastState>({
+    const [forecast, setForecast] = useState<DataState<Forecast>>({
         data: null,
         error: '',
         isLoading: true

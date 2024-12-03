@@ -1,9 +1,10 @@
 import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 import { format } from "date-fns";
-import { ForecastProps } from "@/api/types/forecast-type";
+import { Forecast } from "@/api/types/forecast-type";
+import { DataProps } from "@/api/types/generic-type";
 
-const TemperatureChart = ({ data }: ForecastProps) => {
+const TemperatureChart = ({ data }: DataProps<Forecast>) => {
 
     interface ChartData {
         time: string;

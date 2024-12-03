@@ -1,8 +1,9 @@
 import { ArrowDown, ArrowUp, Droplets, Wind } from 'lucide-react';
 import { Card, CardContent } from './ui/card';
-import { WeatherDataProps } from '@/api/types/weather-type';
+import { WeatherData } from '@/api/types/weather-type';
+import { DataProps } from '@/api/types/generic-type';
 
-const MyLocation = ({ data }: WeatherDataProps) => {
+const MyLocation = ({ data }: DataProps<WeatherData>) => {
 
     const formatTemp = (temp: number): string => {
         return `${Math.round(temp)}°`;

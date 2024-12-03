@@ -1,9 +1,10 @@
 import { Compass, Gauge, Sunrise, Sunset } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
-import { WeatherDataProps } from "@/api/types/weather-type";
+import { WeatherData } from "@/api/types/weather-type";
 import { format } from "date-fns";
+import { DataProps } from "@/api/types/generic-type";
 
-const WeatherDetail = ({ data }: WeatherDataProps) => {
+const WeatherDetail = ({ data }: DataProps<WeatherData>) => {
     const {wind, sys, main} = data;
 
     const formatTime = (timestamp: number) => {

@@ -1,13 +1,14 @@
+import { DataState } from '@/api/types/generic-type';
 import { Coordinates } from '@/api/types/geolocation-type';
-import { WeatherData, WeatherDataState } from '@/api/types/weather-type';
+import { WeatherData } from '@/api/types/weather-type';
 import { getCurrentWeather } from '@/api/weather-api';
 import { useEffect, useState } from 'react';
 
 const useWeather = (coordinates: Coordinates | null) => {
-    const [weather, setWeather] = useState<WeatherDataState>({
+    const [weather, setWeather] = useState<DataState<WeatherData>>({
         data: null,
         error: '',
-        isDataLoaded: false
+        isLoading: true
     });
 
     useEffect(() => {
@@ -22,13 +23,13 @@ const useWeather = (coordinates: Coordinates | null) => {
             setWeather(({
                 data: weather,
                 error: '',
-                isDataLoaded: true
+                isLoading: false
             }));
         }).catch(err => {
             setWeather(({
                 data: null,
                 error: err,
-                isDataLoaded: true
+                isLoading: false
             }));
         });
     }

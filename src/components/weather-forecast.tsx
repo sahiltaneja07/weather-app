@@ -1,10 +1,10 @@
 import { format } from "date-fns";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 import { ArrowDown, ArrowUp, Droplets, Wind } from "lucide-react";
-import { DailyForecast, ForecastProps } from "@/api/types/forecast-type";
+import { DailyForecast, Forecast } from "@/api/types/forecast-type";
+import { DataProps } from "@/api/types/generic-type";
 
-const WeatherForecast = ({data}: ForecastProps) => {
-    console.log(data)
+const WeatherForecast = ({data}: DataProps<Forecast>) => {
     const dailyForecasts = data.list.reduce((acc, forecast) => {
         const date = format(new Date(forecast.dt * 1000), "yyyy-MM-dd");
         if (!acc[date]) {
