@@ -30,3 +30,7 @@ export interface WeatherData {
     name: string;
     dt: number;
 }
+
+export interface WeatherDashboardProps {
+    coordinates: Coordinates;
+}

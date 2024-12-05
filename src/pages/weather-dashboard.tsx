@@ -1,3 +1,4 @@
+import { WeatherDashboardProps } from '@/api/types/weather-type';
 import Loader from '@/components/loader';
 import MyLocation from '@/components/my-location';
 import NoLocation from '@/components/no-location';
@@ -8,16 +9,25 @@ import WeatherForecast from '@/components/weather-forecast';
 import useForecast from '@/hooks/use-forecast';
 import useGeolocation from '@/hooks/use-geolocation';
 import useWeather from '@/hooks/use-weather';
-import { RefreshCw } from 'lucide-react';
+import { ArrowLeft, RefreshCw } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from "sonner";
 
-const WeatherDashboard = () => {
-    const {
+const WeatherDashboard = ({coordinates}: WeatherDashboardProps) => {
+    const navigate = useNavigate();
+
+    let {
         data: coords,
         error: geolocationError,
         isLoading: isGeolocationLoading,
         refreshLocation
     } = useGeolocation();
+
+    let heading: any = 'My Location';
+    if (coordinates) {
+        coords = coordinates;
+        heading = <Button variant='outline' onClick={() => navigate('/')}><ArrowLeft /></Button>
+    }
 
     const {
         data: weatherData,
@@ -59,7 +69,7 @@ const WeatherDashboard = () => {
     return (
         <>
             <div className='flex justify-between mb-3'>
-                <span className='font-bold text-lg'>My Location</span>
+                <span className='font-bold text-lg'>{heading}</span>
                 <Button variant='outline' onClick={refreshWeather}>
                     <RefreshCw />
                 </Button>

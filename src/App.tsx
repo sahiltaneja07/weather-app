@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/layout";
 import { ThemeProvider } from "./context/theme-provider";
 import WeatherDashboard from "./pages/weather-dashboard";
-import FavCities from "./pages/fav-cities";
+import SelectedCity from "./pages/selected-city";
 
 function App() {
 
@@ -11,8 +11,8 @@ function App() {
             <ThemeProvider defaultTheme="dark">
                 <Layout>
                     <Routes>
-                        <Route path="/" element={<WeatherDashboard />}/>
-                        <Route path="/favourite-cities" element={<FavCities />}/>
+                        <Route path="/" element={<WeatherDashboard coordinates={null} />}/>
+                        <Route path="/city/:name" element={<SelectedCity />}/>
                     </Routes>
                 </Layout>  
             </ThemeProvider>

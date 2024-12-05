@@ -6,10 +6,12 @@ import { DialogTitle } from "./ui/dialog";
 import useCities from "@/hooks/use-cities";
 import Loader from "./loader";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const SearchCities = () => {
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState('');
+    const navigate = useNavigate();
 
     const {
         data: cities,
@@ -18,7 +20,9 @@ const SearchCities = () => {
     } = useCities(query);
 
     function onCitySelect(data) {
-        console.log(data)
+        setOpen(false);
+        const dataArr = data.split('|');
+        navigate(`/city/${dataArr[2]}`, {state: {lat: dataArr[0], lon: dataArr[1]}});
     }
 
     if (error) {
